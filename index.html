@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <title>Fisheye</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+</head>
+
+<body>
+    <button onclick="backToTheTop()" id="top-button" title="Go to top"> Passer au contenu </button>
+
+    <header>
+        <a href="index.html"> <img src="img/logo.svg" alt="FishEye Home Page"> </a>
+
+        <nav aria-label="Categories">
+            <ul class="list-tag">
+                <li class="tag"> <a href="#" aria-label="Tag">#<span>Portrait</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag">#<span>Art</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag">#<span>Fashion</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag">#<span>Architecture</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag">#<span>Travel</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag">#<span>Sport</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag">#<span>Animals</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag">#<span>Events</span></a> </li>
+            </ul>
+        </nav>
+
+        <h1>Nos Photographes</h1>
+
+    </header>
+
+    <main>
+        <!-- contenu -->
+        <section id="list-photographers" class="list-photographers">
+            <!--
+            <div class="photographe-card">
+                <a href="pageDuPhotographe.html">
+                    <img src="img/FishEye_Photos/Sample Photos/Photographers ID Photos/MimiKeel.jpg" alt="Mimi Keel" class="photographe-img">
+                    <h2 class="photographe-name">Mimi Keel</h2>
+                </a>
+                <div class="photographe-informations">
+                    <p class="photographe-city">London, UK</p>
+                    <p class="photographe-citation">Voir beau dans le quotidien</p>
+                    <p class="photographe-prix">400€/jour</p>
+                </div>
+                <div class="photographe-tags">
+                    <ul class="photographe-list-tags">
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Portrait</span></a> </li>
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Art</span></a> </li>
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Fashion</span></a> </li>
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Architecture</span></a> </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="photographe-card">
+                <a href="pageDuPhotographe.html">
+                    <img src="img/FishEye_Photos/Sample Photos/Photographers ID Photos/MimiKeel.jpg" alt="Mimi Keel" class="photographe-img">
+                    <h2 class="photographe-name">Mimi Keel</h2>
+                </a>
+                <div class="photographe-informations">
+                    <p class="photographe-city">London, UK</p>
+                    <p class="photographe-citation">Voir beau dans le quotidien</p>
+                    <p class="photographe-prix">400€/jour</p>
+                </div>
+                <div class="photographe-tags">
+                    <ul class="photographe-list-tags">
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Portrait</span></a> </li>
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Art</span></a> </li>
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Fashion</span></a> </li>
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Architecture</span></a> </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="photographe-card">
+                <a href="pageDuPhotographe.html">
+                    <img src="img/FishEye_Photos/Sample Photos/Photographers ID Photos/MimiKeel.jpg" alt="Mimi Keel" class="photographe-img">
+                    <h2 class="photographe-name">Mimi Keel</h2>
+                </a>
+                <div class="photographe-informations">
+                    <p class="photographe-city">London, UK</p>
+                    <p class="photographe-citation">Voir beau dans le quotidien</p>
+                    <p class="photographe-prix">400€/jour</p>
+                </div>
+                <div class="photographe-tags">
+                    <ul class="photographe-list-tags">
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Portrait</span></a> </li>
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Art</span></a> </li>
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Fashion</span></a> </li>
+                        <li class="photographe-list-tag tag"> <a href="pageDuPhotographe.html" aria-label="Tag">#<span>Architecture</span></a> </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+
+
+        </section>
+    </main>
+
+</body>
