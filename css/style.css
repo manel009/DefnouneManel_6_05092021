@@ -29,8 +29,8 @@ button {
 }
 
 button:hover {
-    background: #fafafa;
-    color: #911C1C;
+    background: #D3573C;
+    color: #000000;
 }
 
 #top-button {
@@ -85,6 +85,7 @@ header img {
     display: grid;
     grid-template-columns: repeat(auto-fill, 400px);
     grid-gap: 50px;
+    margin-bottom: 20px;
 }
 
 
@@ -151,4 +152,54 @@ header img {
 
 .photographe-list-tag {
     font-size: 12px;
+}
+
+
+/* Profl du photographe */
+
+#photographer-profil {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #fafafa;
+    padding: 60px 30px;
+    margin: 10px;
+}
+
+.photographer-profil-name {
+    color: #D3573C;
+    font-size: 64px;
+}
+
+.photographer-profil-city {
+    color: #901C1C;
+    font-size: 30px;
+    margin-bottom: 3px;
+}
+
+.photographer-profil-citation {
+    color: #525252;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.photographer-profil-contact {
+    flex: 50%;
+    text-align: left;
+    padding-left: 20px;
+}
+
+#contact-photographer {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.photographer-profil-list-tags {
+    display: flex;
+    flex-direction: row;
+}
+
+.photographer-profil-list-tag {
+    margin-top: 5px;
+    font-size: 17px;
 }
