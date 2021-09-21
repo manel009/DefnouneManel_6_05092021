@@ -12,7 +12,7 @@ export class Photographer {
      * @param {*} portrait 
      * @param {*} altportrait 
      */
-    constructor(id,name,city,country,tags,tagline,price,portrait, altportrait){
+    constructor(id, name, city, country, tags, tagline, price, portrait, altportrait) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -22,18 +22,18 @@ export class Photographer {
         this.price = price;
         this.portrait = portrait;
         this.altportrait = altportrait;
-  
+
     }
-  
+
     /**
      * Renvoi la location du photographe
      * @returns location
      */
-    getLocation(){
-        return this.city + "," +this.country;
+    getLocation() {
+        return this.city + "," + this.country;
     }
 
-    getPrice(){
-        return this.price +"€/jour"
+    getPrice() {
+        return this.price + "€/jour"
     }
-  }
+}

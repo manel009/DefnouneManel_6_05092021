@@ -8,28 +8,67 @@ $(document).ready(function() {
 
         // On recupere les donnees des photographes dans le JSON
         var dataPhotographers = data.photographers;
+        var dataMedias = data.media;
 
+        // On recupere le parametre dans l'url
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const idPhotographer = urlParams.get('id')
 
-
-        // Pour chaque photographe recupere, on cree une entite Photographe qu'on passe a la fonction
-        // generatePhotographerCard.
-        for (const [key, dataPhotographer] of Object.entries(dataPhotographers)) {
-
-            let photographer = new Photographer(dataPhotographer.id,
-                dataPhotographer.name,
-                dataPhotographer.city,
-                dataPhotographer.country,
-                dataPhotographer.tags,
-                dataPhotographer.tagline,
-                dataPhotographer.price,
-                dataPhotographer.portrait,
-                dataPhotographer.altportait);
-            generatePhotographerCard(photographer);
+        // Si un id dans l'url, on affiche la page du photographe sinon la page d'acceuil
+        if (idPhotographer > 0) {
+            printPhotographerPage(dataPhotographers);
+        } else {
+            printHomePage(dataPhotographers);
         }
 
+
+        /** Affiche la page d'acceuil
+         * 
+         * @param {*} dataPhotographers 
+         */
+        function printHomePage(dataPhotographers) {
+            // Pour chaque photographe recupere, on cree une entite Photographe qu'on passe a la fonction
+            // generatePhotographerCard.
+            for (const [key, dataPhotographer] of Object.entries(dataPhotographers)) {
+
+                let photographer = new Photographer(dataPhotographer.id,
+                    dataPhotographer.name,
+                    dataPhotographer.city,
+                    dataPhotographer.country,
+                    dataPhotographer.tags,
+                    dataPhotographer.tagline,
+                    dataPhotographer.price,
+                    dataPhotographer.portrait,
+                    dataPhotographer.altportait);
+                generatePhotographerCard(photographer);
+            }
+        }
+
+        /** Affiche le profil d'un photographe
+         * 
+         * @param {*} dataPhotographers 
+         */
+        function printPhotographerPage(dataPhotographers) {
+            for (const [key, dataPhotographer] of Object.entries(dataPhotographers)) {
+                if (idPhotographer == dataPhotographer.id) {
+                    let photographer = new Photographer(dataPhotographer.id,
+                        dataPhotographer.name,
+                        dataPhotographer.city,
+                        dataPhotographer.country,
+                        dataPhotographer.tags,
+                        dataPhotographer.tagline,
+                        dataPhotographer.price,
+                        dataPhotographer.portrait,
+                        dataPhotographer.altportait);
+                    generatePhotographerProfil(photographer);
+                }
+            }
+        }
+
+        function printPhotographerMedia(idPhotographer) {
+
+        }
 
         /** Cree le block HTML pour chaque photographe
          * 
@@ -177,6 +216,6 @@ $(document).ready(function() {
 
 
     }).fail(function() {
-        console.log("An error has occurred.");
+        console.log("Charegemnt des données JSON impossible.");
     });
 });

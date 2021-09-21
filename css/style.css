@@ -20,12 +20,21 @@ ul {
     list-style-type: none;
 }
 
-button {
+button,
+select {
     background: #911C1C;
     color: #fafafa;
     border-radius: 5px;
     padding: 20px;
     border: none;
+}
+
+select,
+option {
+    padding: 20px;
+    border: none;
+    font-weight: bold;
+    font-size: 17px;
 }
 
 button:hover {
@@ -86,6 +95,7 @@ header img {
     grid-template-columns: repeat(auto-fill, 400px);
     grid-gap: 50px;
     margin-bottom: 20px;
+    justify-content: center;
 }
 
 
@@ -202,4 +212,46 @@ header img {
 .photographer-profil-list-tag {
     margin-top: 5px;
     font-size: 17px;
+}
+
+
+/* Galerie du photographe */
+
+.select-galerie-order {
+    margin: 15px;
+}
+
+.select-galerie-order label {
+    color: black;
+    font-weight: bold;
+}
+
+.galerie {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 400px);
+    grid-gap: 50px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.media-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-image {
+    width: 380px;
+    height: 380px;
+    overflow: hidden;
+    border-radius: 3%;
+    object-fit: cover;
+}
+
+.media-informations {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 380px;
 }
