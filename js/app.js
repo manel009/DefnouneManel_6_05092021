@@ -1,5 +1,6 @@
 // On charge la classe Photographer
 import { Photographer } from "./class/photographer.js";
+import { Media } from "./class/media.js";
 
 
 $(document).ready(function() {
@@ -17,7 +18,10 @@ $(document).ready(function() {
 
         // Si un id dans l'url, on affiche la page du photographe sinon la page d'acceuil
         if (idPhotographer > 0) {
-            printPhotographerPage(dataPhotographers);
+            let photographer = findPhotographer(idPhotographer, dataPhotographers);
+            let photographerFirstName = getFirstName(photographer.name);
+            printPhotographerPage(photographer);
+            printPhotographerMedia(idPhotographer, photographerFirstName, dataMedias);
         } else {
             printHomePage(dataPhotographers);
         }
@@ -49,25 +53,19 @@ $(document).ready(function() {
          * 
          * @param {*} dataPhotographers 
          */
-        function printPhotographerPage(dataPhotographers) {
-            for (const [key, dataPhotographer] of Object.entries(dataPhotographers)) {
-                if (idPhotographer == dataPhotographer.id) {
-                    let photographer = new Photographer(dataPhotographer.id,
-                        dataPhotographer.name,
-                        dataPhotographer.city,
-                        dataPhotographer.country,
-                        dataPhotographer.tags,
-                        dataPhotographer.tagline,
-                        dataPhotographer.price,
-                        dataPhotographer.portrait,
-                        dataPhotographer.altportait);
-                    generatePhotographerProfil(photographer);
-                }
-            }
+        function printPhotographerPage(photographer) {
+            generatePhotographerProfil(photographer);
+
         }
 
-        function printPhotographerMedia(idPhotographer) {
-
+        /** Affiche la partie galerie d'un photographe
+         * 
+         * @param {*} idPhotographer 
+         * @param {*} dataMedias 
+         */
+        function printPhotographerMedia(idPhotographer, photographerName, dataMedias) {
+            generateSelectOrder();
+            generateGalerie(idPhotographer, photographerName, dataMedias)
         }
 
         /** Cree le block HTML pour chaque photographe
@@ -212,6 +210,181 @@ $(document).ready(function() {
             imageDiv.appendChild(imgPhotographer);
 
 
+        }
+
+        /** Genere le select pour le tri
+         * 
+         */
+        function generateSelectOrder() {
+            // Ajout du select pour le tri
+            let divSelect = document.createElement('div');
+            divSelect.className = 'select-galerie-order';
+            document.getElementById('photographer-galerie').appendChild(divSelect);
+
+            let labelSelect = document.createElement('label');
+            labelSelect.htmlFor = 'select-order';
+            labelSelect.innerHTML = 'Trier par : ';
+            divSelect.appendChild(labelSelect);
+
+            let selectOrder = document.createElement('select');
+            selectOrder.className = 'select-order';
+            selectOrder.id = 'select-order';
+            divSelect.appendChild(selectOrder);
+
+            // Ajout des options
+            let selectOptionOrder = document.createElement('option');
+            selectOptionOrder.value = 'title';
+            selectOptionOrder.innerHTML = 'Titre';
+            selectOrder.appendChild(selectOptionOrder);
+
+            selectOptionOrder = document.createElement('option');
+            selectOptionOrder.value = 'date';
+            selectOptionOrder.innerHTML = 'Date';
+            selectOrder.appendChild(selectOptionOrder);
+
+            selectOptionOrder = document.createElement('option');
+            selectOptionOrder.value = 'likes';
+            selectOptionOrder.innerHTML = 'Popularité';
+            selectOrder.appendChild(selectOptionOrder);
+        }
+
+        /** Genere la galerie de media d'un photographe
+         * 
+         * @param {*} idPhotographer 
+         * @param {*} dataMedias 
+         */
+        function generateGalerie(idPhotographer, photographerName, dataMedias) {
+
+            let divGalerie = document.createElement('div');
+            divGalerie.className = 'galerie';
+            divGalerie.id = 'galerie';
+            document.getElementById('photographer-galerie').appendChild(divGalerie);
+
+            for (const [key, dataMedia] of Object.entries(dataMedias)) {
+
+                if (dataMedia.photographerId == idPhotographer) {
+                    let media = new Media(
+                        dataMedia.id,
+                        dataMedia.photographerId,
+                        dataMedia.title,
+                        dataMedia.image,
+                        dataMedia.video,
+                        dataMedia.tags,
+                        dataMedia.likes,
+                        dataMedia.price,
+                        dataMedia.date);
+                    generateMedia(media, photographerName);
+                }
+            }
+
+
+        }
+
+        /** Genere le block html du media dans la galerie 
+         * 
+         * @param {*} media 
+         * @param {*} photographerName 
+         */
+        function generateMedia(media, photographerName) {
+
+            let figureMedia = document.createElement('figure');
+            figureMedia.className = "media-card";
+            figureMedia.setAttribute("data-title", media.title);
+            figureMedia.setAttribute("data-likes", media.likes);
+            figureMedia.setAttribute("data-date", media.date);
+            document.getElementById('galerie').appendChild(figureMedia);
+
+            if (isVideo(media)) {
+                let linkMedia = document.createElement('a');
+                linkMedia.href = "img/FishEye_Photos/Sample Photos/" + photographerName + "/" + media.video;
+                figureMedia.appendChild(linkMedia);
+
+                let imgMedia = document.createElement('video');
+                imgMedia.className = "media-image";
+                imgMedia.title = media.title;
+                linkMedia.appendChild(imgMedia);
+
+                let sourceMedia = document.createElement('source');
+                sourceMedia.src = linkMedia.href;
+                sourceMedia.type = "video/mp4";
+                imgMedia.appendChild(sourceMedia);
+
+            } else {
+                let linkMedia = document.createElement('a');
+                linkMedia.href = "img/FishEye_Photos/Sample Photos/" + photographerName + "/" + media.image;
+                figureMedia.appendChild(linkMedia);
+
+                let imgMedia = document.createElement('img');
+                imgMedia.className = "media-image";
+                imgMedia.src = linkMedia.href;
+                linkMedia.appendChild(imgMedia);
+            }
+
+            let divMediaInfos = document.createElement('div');
+            divMediaInfos.className = "media-informations";
+            figureMedia.appendChild(divMediaInfos);
+
+            let figcaption = document.createElement('figcaption');
+            figcaption.innerText = media.title;
+            divMediaInfos.appendChild(figcaption);
+
+            let likesText = document.createElement('p');
+            likesText.className = "media-likes";
+            likesText.innerHTML = media.likes + '<i class="fas fa-heart"></i>';
+            divMediaInfos.appendChild(likesText);
+
+        }
+
+        /** Check si le fichier est une video ou non
+         * 
+         * @param {*} media 
+         * @returns 
+         */
+        function isVideo(media) {
+            if (media.video === undefined) {
+                return false;
+            }
+            return true;
+
+        }
+
+        /** Renvoi le photographe avec l'id en param
+         * 
+         * @param {*} idPhotographer 
+         * @param {*} dataPhotographers 
+         * @returns 
+         */
+        function findPhotographer(idPhotographer, dataPhotographers) {
+            let photographer = "";
+            let indice = 0;
+
+            while (photographer == "") {
+
+                if (dataPhotographers[indice].id == idPhotographer) {
+                    photographer = new Photographer(dataPhotographers[indice].id,
+                        dataPhotographers[indice].name,
+                        dataPhotographers[indice].city,
+                        dataPhotographers[indice].country,
+                        dataPhotographers[indice].tags,
+                        dataPhotographers[indice].tagline,
+                        dataPhotographers[indice].price,
+                        dataPhotographers[indice].portrait,
+                        dataPhotographers[indice].altportait);
+                }
+                indice++;
+            }
+
+            return photographer;
+
+        }
+
+        /** Renvoi le prenom d'un nom complet
+         * 
+         * @param {*} fullname 
+         * @returns 
+         */
+        function getFirstName(fullname) {
+            return fullname.split(" ")[0];
         }
 
 

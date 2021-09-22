@@ -33,7 +33,19 @@ export class Photographer {
         return this.city + "," + this.country;
     }
 
+    /** renvoi le prix au format d'affichage
+     * 
+     * @returns 
+     */
     getPrice() {
         return this.price + "€/jour"
+    }
+
+    /** Renvi le prenom
+     * 
+     * @returns 
+     */
+    getFirstName() {
+        return this.name.split(" ")[0];
     }
 }
