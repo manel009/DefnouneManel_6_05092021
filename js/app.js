@@ -18,6 +18,8 @@ $(document).ready(function() {
 
         // Si un id dans l'url, on affiche la page du photographe sinon la page d'acceuil
         if (idPhotographer > 0) {
+            hideElement("nav-categories");
+            hideElement("title-photographers-header");
             let photographer = findPhotographer(idPhotographer, dataPhotographers);
             let photographerFirstName = getFirstName(photographer.name);
             printPhotographerPage(photographer);
@@ -385,6 +387,10 @@ $(document).ready(function() {
          */
         function getFirstName(fullname) {
             return fullname.split(" ")[0];
+        }
+
+        function hideElement(idElement) {
+            document.getElementById(idElement).style.visibility = "hidden";
         }
 
 
