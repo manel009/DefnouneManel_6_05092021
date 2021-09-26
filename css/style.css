@@ -261,3 +261,19 @@ header img {
     justify-content: space-between;
     width: 380px;
 }
+
+#price-card {
+    display: flex;
+    position: fixed;
+    background-color: #db8876;
+    border-radius: 5%;
+    color: #000;
+    justify-content: space-between;
+    padding: 20px 30px;
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+    bottom: -5px;
+    right: 1rem;
+    gap: 3rem;
+}

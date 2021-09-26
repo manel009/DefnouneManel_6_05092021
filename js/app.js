@@ -20,10 +20,9 @@ $(document).ready(function() {
         if (idPhotographer > 0) {
             hideElement("nav-categories");
             hideElement("title-photographers-header");
-            let photographer = findPhotographer(idPhotographer, dataPhotographers);
-            let photographerFirstName = getFirstName(photographer.name);
-            printPhotographerPage(photographer);
-            printPhotographerMedia(idPhotographer, photographerFirstName, dataMedias);
+            let photographe = findPhotographer(idPhotographer, dataPhotographers);
+            printPhotographerPage(photographe);
+            printPhotographerMedia(photographe, dataMedias);
         } else {
             printHomePage(dataPhotographers);
         }
@@ -65,9 +64,9 @@ $(document).ready(function() {
          * @param {*} idPhotographer 
          * @param {*} dataMedias 
          */
-        function printPhotographerMedia(idPhotographer, photographerName, dataMedias) {
+        function printPhotographerMedia(idPhotographer, photographerFirstName, dataMedias) {
             generateSelectOrder();
-            generateGalerie(idPhotographer, photographerName, dataMedias)
+            generateGalerie(idPhotographer, photographerFirstName, dataMedias)
         }
 
         /** Cree le block HTML pour chaque photographe
@@ -252,15 +251,19 @@ $(document).ready(function() {
 
         /** Genere la galerie de media d'un photographe
          * 
-         * @param {*} idPhotographer 
+         * @param {*} photographe
          * @param {*} dataMedias 
          */
-        function generateGalerie(idPhotographer, photographerName, dataMedias) {
+        function generateGalerie(photographe, dataMedias) {
+
+            let photographeFirstName = getFirstName(photographe.name);
 
             let divGalerie = document.createElement('div');
             divGalerie.className = 'galerie';
             divGalerie.id = 'galerie';
             document.getElementById('photographer-galerie').appendChild(divGalerie);
+
+            let totalLikes = 0;
 
             for (const [key, dataMedia] of Object.entries(dataMedias)) {
 
@@ -275,11 +278,12 @@ $(document).ready(function() {
                         dataMedia.likes,
                         dataMedia.price,
                         dataMedia.date);
-                    generateMedia(media, photographerName);
+                    generateMedia(media, photographeFirstName);
+                    totalLikes += dataMedia.likes;
                 }
             }
 
-
+            printPhotographerPrice(totalLikes, photographe.getPrice());
         }
 
         /** Genere le block html du media dans la galerie 
@@ -347,6 +351,23 @@ $(document).ready(function() {
                 return false;
             }
             return true;
+
+        }
+
+
+        function printPhotographerPrice(likes, price) {
+            let divPrice = document.createElement('div');
+            divPrice.id = 'price-card';
+            document.getElementById('photographer-galerie').appendChild(divPrice);
+
+            let likesText = document.createElement('span');
+            likesText.innerHTML = likes + '<i class="fas fa-heart"></i>';
+            divPrice.appendChild(likesText);
+
+            let spanePrice = document.createElement('span');
+            spanePrice.innerHTML = price;
+            divPrice.appendChild(spanePrice);
+
 
         }
 
