@@ -22,7 +22,8 @@ export class Photographer {
         this.price = price;
         this.portrait = portrait;
         this.altportrait = altportrait;
-
+        this.medias = [];
+        this.totalLikes = 0;
     }
 
     /**
@@ -48,4 +49,22 @@ export class Photographer {
     getFirstName() {
         return this.name.split(" ")[0];
     }
+
+    /**
+     * 
+     * @param {*} media 
+     */
+    addMedia(media) {
+
+        this.medias.push(media);
+    }
+
+    /**
+     * 
+     * @param {*} totalLikes 
+     */
+    setTotalLikes(totalLikes) {
+        this.totalLikes = totalLikes;
+    }
+
 }

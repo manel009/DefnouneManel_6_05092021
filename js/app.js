@@ -20,9 +20,9 @@ $(document).ready(function() {
         if (idPhotographer > 0) {
             hideElement("nav-categories");
             hideElement("title-photographers-header");
-            let photographe = findPhotographer(idPhotographer, dataPhotographers);
+            let photographe = findPhotographer(idPhotographer, dataPhotographers, dataMedias);
             printPhotographerPage(photographe);
-            printPhotographerMedia(photographe, dataMedias);
+            printPhotographerMedia(photographe);
         } else {
             printHomePage(dataPhotographers);
         }
@@ -64,9 +64,9 @@ $(document).ready(function() {
          * @param {*} idPhotographer 
          * @param {*} dataMedias 
          */
-        function printPhotographerMedia(idPhotographer, photographerFirstName, dataMedias) {
+        function printPhotographerMedia(photographer) {
             generateSelectOrder();
-            generateGalerie(idPhotographer, photographerFirstName, dataMedias)
+            generateGalerie(photographer);
         }
 
         /** Cree le block HTML pour chaque photographe
@@ -254,36 +254,47 @@ $(document).ready(function() {
          * @param {*} photographe
          * @param {*} dataMedias 
          */
-        function generateGalerie(photographe, dataMedias) {
+        function generateGalerie(photographe) {
 
-            let photographeFirstName = getFirstName(photographe.name);
+            let photographeFirstName = photographe.getFirstName();
 
             let divGalerie = document.createElement('div');
             divGalerie.className = 'galerie';
             divGalerie.id = 'galerie';
             document.getElementById('photographer-galerie').appendChild(divGalerie);
 
-            let totalLikes = 0;
-
-            for (const [key, dataMedia] of Object.entries(dataMedias)) {
-
-                if (dataMedia.photographerId == idPhotographer) {
-                    let media = new Media(
-                        dataMedia.id,
-                        dataMedia.photographerId,
-                        dataMedia.title,
-                        dataMedia.image,
-                        dataMedia.video,
-                        dataMedia.tags,
-                        dataMedia.likes,
-                        dataMedia.price,
-                        dataMedia.date);
-                    generateMedia(media, photographeFirstName);
-                    totalLikes += dataMedia.likes;
-                }
+            // Tri des medias
+            let orderByValue = document.getElementById('select-order').value;
+            switch (orderByValue) {
+                case 'title':
+                    photographe.medias.sort((a, b) => {
+                        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+                            return -1;
+                        }
+                        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+                            return 1;
+                        }
+                        return 0;
+                    });
+                    break;
+                case 'date':
+                    photographe.medias.sort((a, b) => {
+                        return new Date(a.date) - new Date(b.date);
+                    });
+                    break;
+                case 'likes':
+                    photographe.medias.sort((a, b) => {
+                        return a.likes - b.likes;
+                    });
+                    break;
             }
 
-            printPhotographerPrice(totalLikes, photographe.getPrice());
+            // Affichge des medias triés 
+            photographe.medias.forEach(media => {
+                generateMedia(media, photographeFirstName);
+            });
+
+            printPhotographerPrice(photographe.totalLikes, photographe.getPrice());
         }
 
         /** Genere le block html du media dans la galerie 
@@ -377,7 +388,7 @@ $(document).ready(function() {
          * @param {*} dataPhotographers 
          * @returns 
          */
-        function findPhotographer(idPhotographer, dataPhotographers) {
+        function findPhotographer(idPhotographer, dataPhotographers, dataMedias) {
             let photographer = "";
             let indice = 0;
 
@@ -397,17 +408,29 @@ $(document).ready(function() {
                 indice++;
             }
 
+            // Ajout de ses medias et likes
+            let totalLikes = 0;
+            for (const [key, dataMedia] of Object.entries(dataMedias)) {
+
+                if (dataMedia.photographerId == idPhotographer) {
+                    let media = new Media(
+                        dataMedia.id,
+                        dataMedia.photographerId,
+                        dataMedia.title,
+                        dataMedia.image,
+                        dataMedia.video,
+                        dataMedia.tags,
+                        dataMedia.likes,
+                        dataMedia.price,
+                        dataMedia.date);
+                    photographer.addMedia(media);
+                    totalLikes += dataMedia.likes;
+                }
+            }
+            photographer.setTotalLikes(totalLikes);
+
             return photographer;
 
-        }
-
-        /** Renvoi le prenom d'un nom complet
-         * 
-         * @param {*} fullname 
-         * @returns 
-         */
-        function getFirstName(fullname) {
-            return fullname.split(" ")[0];
         }
 
         function hideElement(idElement) {
