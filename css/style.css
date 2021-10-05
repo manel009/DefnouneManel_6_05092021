@@ -59,6 +59,7 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    flex-wrap: wrap;
     padding: 20px;
 }
 
@@ -75,6 +76,13 @@ header img {
 .list-tag {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 5px;
+}
+
+.tag {
+    margin-bottom: 15px;
 }
 
 .tag a {
@@ -83,6 +91,7 @@ header img {
     color: #901C1C;
     padding: 5px;
     margin: 2px;
+    margin-bottom: 10px;
 }
 
 .tag:hover a {
@@ -91,6 +100,22 @@ header img {
 
 .tag:hover a {
     color: #fafafa;
+}
+
+@media (max-width: 1200px) {
+    #title-photographers-header {
+        text-align: right;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 1000px) {
+    #title-photographers-header {
+        order: 1;
+    }
+    #nav-categories {
+        order: 2;
+    }
 }
 
 
@@ -210,6 +235,18 @@ header img {
     font-size: 15px;
 }
 
+@media (max-width: 900px) {
+    #contact-photographer {
+        font-weight: bold;
+        font-size: 15px;
+        display: flex;
+        position: fixed;
+        bottom: 15px;
+        left: 50%;
+        padding: 10px;
+    }
+}
+
 .photographer-profil-list-tags {
     display: flex;
     flex-direction: row;
@@ -276,4 +313,10 @@ header img {
     bottom: -5px;
     right: 1rem;
     gap: 3rem;
+}
+
+@media (max-width: 900px) {
+    #price-card {
+        display: none;
+    }
 }
