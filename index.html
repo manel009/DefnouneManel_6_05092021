@@ -11,9 +11,6 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <title>Fisheye</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="module" src="js/app.js"></script>
-    <script type="text/javascript" src="js/functions.js"></script>
 </head>
 
 <body>
@@ -24,14 +21,14 @@
 
         <nav aria-label="Categories" id="nav-categories">
             <ul class="list-tag">
-                <li class="tag"> <a href="#" aria-label="Tag">#<span>Portrait</span></a> </li>
-                <li class="tag"> <a href="#" aria-label="Tag">#<span>Art</span></a> </li>
-                <li class="tag"> <a href="#" aria-label="Tag">#<span>Fashion</span></a> </li>
-                <li class="tag"> <a href="#" aria-label="Tag">#<span>Architecture</span></a> </li>
-                <li class="tag"> <a href="#" aria-label="Tag">#<span>Travel</span></a> </li>
-                <li class="tag"> <a href="#" aria-label="Tag">#<span>Sport</span></a> </li>
-                <li class="tag"> <a href="#" aria-label="Tag">#<span>Animals</span></a> </li>
-                <li class="tag"> <a href="#" aria-label="Tag">#<span>Events</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag" onclick="filterPhotographersByTag('portrait');">#<span>Portrait</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag" onclick="filterPhotographersByTag('art');">#<span>Art</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag" onclick="filterPhotographersByTag('fashion');">#<span>Fashion</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag" onclick="filterPhotographersByTag('architecture');">#<span>Architecture</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag" onclick="filterPhotographersByTag('travel');">#<span>Travel</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag" onclick="filterPhotographersByTag('sport');">#<span>Sport</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag" onclick="filterPhotographersByTag('animals');">#<span>Animals</span></a> </li>
+                <li class="tag"> <a href="#" aria-label="Tag" onclick="filterPhotographersByTag('events');">#<span>Events</span></a> </li>
             </ul>
         </nav>
 
@@ -43,80 +40,13 @@
         <!-- contenu -->
         <section id="list-photographers" class="list-photographers"></section>
 
-        <section id="photographer-profil">
-            <!-- 
-            <div class="photographer-profil-infos">
-                <h2 class="photographer-profil-name">Mimi Keel</h2>
-                <p class="photographer-profil-city">London, UK</p>
-                <p class="photographer-profil-citation">Voir beau dans le quotidien</p>
-                <div class="photographer-profil-tags">
-                    <ul class="photographer-profil-list-tags">
-                        <li class="photographer-profil-list-tag tag"><a href="#" aria-label="Tag">#sport</a></li>
-                        <li class="photographer-profil-list-tag tag"><a href="#" aria-label="Tag">#fashion</a></li>
-                        <li class="photographer-profil-list-tag tag"><a href="#" aria-label="Tag">#events</a></li>
-                        <li class="photographer-profil-list-tag tag"><a href="#" aria-label="Tag">#animals</a></li>
-                    </ul>
-                </div>
-            </div>
+        <section id="photographer-profil"></section>
 
-            <div class="photographer-profil-contact">
-                <button id="contact-photographer" aria-label="Contact me">Contactez-moi</button>
-            </div>
-
-            <div class="photographer-profil-image">
-                <img src="img/FishEye_Photos/Sample Photos/Photographers ID Photos/MimiKeel.jpg" alt="Mimi Keel" class="photographe-img">
-            </div>
-            -->
-        </section>
-
-        <section id="photographer-galerie">
-
-            <div class="galerie">
-
-                <!-- 
-                <figure class="media-card" data-likes="12" data-title="Arc-en-vie" data-date="2019-08-23">
-                    <a href="img/FishEye_Photos/Sample Photos/Mimi/Animals_Rainbow.jpg">
-                        <img class="media-image" src="img/FishEye_Photos/Sample Photos/Mimi/Animals_Rainbow.jpg" alt="Photo title">
-                    </a>
-                    <div class="media-informations">
-                        <figcaption class="media-title">Arc-en-vie</figcaption>
-                        <p class="media-likes">12 <i class="fas fa-heart"></i></p>
-                    </div>
-                </figure>
-
-                <figure class="media-card" data-likes="142" data-title="Wild Horses in the Mountains" data-date="2019-08-23">
-                    <a href="img/FishEye_Photos/Sample Photos/Mimi/Animals_Wild_Horses_in_the_mountains.mp4">
-                        <video class="media-image" title="Troupeau de cheveaux se déplaçant sur une prairie." data-id="5234343">
-                            <source src="img/FishEye_Photos/Sample Photos/Mimi/Animals_Wild_Horses_in_the_mountains.mp4" type="video/mp4">
-                        </video>
-                    </a>
-                    <div class="media-informations">
-                        <figcaption>Wild Horses in the Mountains</figcaption>
-                        <p class="media-likes">12 <i class="fas fa-heart"></i></p>
-                    </div>
-                </figure>
-
-                <figure class="media-card" data-likes="12" data-title="Arc-en-vie" data-date="2019-08-23">
-                    <a href="img/FishEye_Photos/Sample Photos/Mimi/Animals_Rainbow.jpg">
-                        <img class="media-image" src="img/FishEye_Photos/Sample Photos/Mimi/Animals_Rainbow.jpg" alt="Photo title">
-                    </a>
-                    <div class="media-informations">
-                        <figcaption class="media-title">Arc-en-vie</figcaption>
-                        <p class="media-likes">12 <i class="fas fa-heart"></i></p>
-                    </div>
-                </figure>
--->
-
-            </div>
-
-            <!--
-            <div id="price-card">
-                <span> 500 <i class="fas fa-heart"></i></span>
-                <span> 300/jour </span>
-            </div>
- -->
-
-        </section>
+        <section id="photographer-galerie"></section>
     </main>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
