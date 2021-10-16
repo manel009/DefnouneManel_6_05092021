@@ -22,7 +22,7 @@ function backToTheTop() {
  * @param {*} idElement 
  */
 function hideElement(idElement) {
-    document.getElementById(idElement).style.visibility = "hidden";
+    document.getElementById(idElement).style.display = "none";
 }
 
 /** Check si le fichier est une video ou non
@@ -248,6 +248,7 @@ function printPhotographerPage(photographer) {
     generatePhotographerProfil(photographer);
     generateSelectOrder();
     generateGalerie(photographer);
+    generateForm(photographer);
 
 }
 
@@ -307,6 +308,7 @@ function generatePhotographerProfil(photographer) {
     contactButton.id = "contact-photographer";
     contactButton.ariaLabel = "Contact me";
     contactButton.innerHTML = "Contactez moi";
+    contactButton.setAttribute('onclick', 'showForm()');
     contactDiv.appendChild(contactButton);
 
 
@@ -317,7 +319,7 @@ function generatePhotographerProfil(photographer) {
 
     let imgPhotographer = document.createElement('img');
     imgPhotographer.src = "img/FishEye_Photos/Sample Photos/Photographers ID Photos/" + photographer.portrait;
-    imgPhotographer.className = 'photographe-img';
+    imgPhotographer.className = 'photographer-profil-image-img';
     imgPhotographer.alt = photographer.altportrait;
     imageDiv.appendChild(imgPhotographer);
 
@@ -410,4 +412,28 @@ function printPhotographerPrice(likes, price) {
     divPrice.appendChild(spanePrice);
 
 
+}
+
+/**
+ * Ajout le nom du photographe pour le formulaire
+ * @param {*} photographe 
+ */
+function generateForm(photographe) {
+    document.getElementById("photographer-form-header-name").innerHTML = photographe.name;
+}
+
+/**
+ * Ferme le formulaire de contact
+ */
+function closeForm() {
+    document.getElementById("photographer-contact-form-section").style.display =
+        "none";
+}
+
+/**
+ * Affcihe le formulaire de contact
+ */
+function showForm() {
+    document.getElementById("photographer-contact-form-section").style.display =
+        "flex";
 }

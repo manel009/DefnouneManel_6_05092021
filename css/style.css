@@ -58,7 +58,7 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
     padding: 20px;
 }
@@ -199,7 +199,7 @@ header img {
 /* Profl du photographe */
 
 #photographer-profil {
-    display: flex;
+    display: none;
     flex-direction: row;
     justify-content: space-around;
     background-color: #fafafa;
@@ -224,6 +224,40 @@ header img {
     margin-bottom: 3px;
 }
 
+.photographer-profil-list-tags {
+    display: flex;
+    flex-direction: row;
+}
+
+.photographer-profil-list-tag {
+    margin-top: 5px;
+    font-size: 17px;
+}
+
+@media (max-width:650px) {
+    .photographer-profil-name {
+        font-size: 32px;
+    }
+    .photographer-profil-city {
+        font-size: 15px;
+        margin-bottom: 3px;
+    }
+    .photographer-profil-citation {
+        font-size: 10px;
+        margin-bottom: 3px;
+    }
+    .photographer-profil-list-tag {
+        margin-top: 5px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width:350px) {
+    .photographer-profil-list-tags {
+        flex-direction: column;
+    }
+}
+
 .photographer-profil-contact {
     flex: 50%;
     text-align: left;
@@ -241,20 +275,27 @@ header img {
         font-size: 15px;
         display: flex;
         position: fixed;
-        bottom: 15px;
-        left: 50%;
+        bottom: 0;
+        left: 40%;
+        margin: 5px auto;
         padding: 10px;
     }
 }
 
-.photographer-profil-list-tags {
-    display: flex;
-    flex-direction: row;
+.photographer-profil-image-img {
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 2px 1px 15px 5px #52525228;
 }
 
-.photographer-profil-list-tag {
-    margin-top: 5px;
-    font-size: 17px;
+@media (max-width:650px) {
+    .photographer-profil-image-img {
+        width: 130px;
+        height: 130px;
+    }
 }
 
 
@@ -299,6 +340,16 @@ header img {
     width: 380px;
 }
 
+@media (max-width: 400px) {
+    .media-image {
+        width: 300px;
+        height: 180px;
+    }
+    .media-informations {
+        width: 300px;
+    }
+}
+
 #price-card {
     display: flex;
     position: fixed;
@@ -319,4 +370,76 @@ header img {
     #price-card {
         display: none;
     }
+}
+
+
+/* Formulaire de contact */
+
+#photographer-contact-form-section {
+    background: #db8876;
+    color: black;
+    width: 60%;
+    min-width: 450px;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    height: 200px;
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    min-height: 100vh;
+}
+
+#photographer-form-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#photographer-form-header h2 {
+    font-size: 45px;
+}
+
+#close-form {
+    font-size: 45px;
+    color: #f0f0f0;
+    cursor: pointer;
+}
+
+#photographer-contact-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+}
+
+#photographer-contact-form input,
+textarea,
+input:focus,
+textarea:focus {
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+#photographer-contact-form label {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#photographer-contact-form input {
+    font-size: 30px;
+}
+
+#photographer-contact-form-message {
+    height: 200px;
+    font-size: 30px;
+}
+
+#photographer-contact-form-submit {
+    max-width: 150px;
+    margin-top: 20px;
 }

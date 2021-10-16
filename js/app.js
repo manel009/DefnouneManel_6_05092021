@@ -23,10 +23,15 @@ export function loadPage() {
             hideElement("nav-categories");
             hideElement("title-photographers-header");
             hideElement("top-button");
+            document.getElementById("photographer-profil").style.display = "flex";
             let photographe = findPhotographer(idPhotographer, dataPhotographers, dataMedias);
             window.photographe = photographe;
             printPhotographerPage(photographe);
         } else {
+
+            window.onscroll = function() {
+                scrollFunction()
+            };
             printHomePage(dataPhotographers);
         }
     });
