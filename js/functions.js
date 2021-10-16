@@ -66,6 +66,8 @@ function orderMedia(orderBy, medias) {
             });
             break;
     }
+
+    return medias;
 }
 
 /** Genere le block html du media dans la galerie 
@@ -73,7 +75,7 @@ function orderMedia(orderBy, medias) {
  * @param {*} media 
  * @param {*} photographerName 
  */
-function generateMedia(media, photographerName) {
+function generateMedia(media, photographerName, mediaPosition) {
 
     let figureMedia = document.createElement('figure');
     figureMedia.className = "media-card";
@@ -84,7 +86,7 @@ function generateMedia(media, photographerName) {
 
     if (isVideo(media)) {
         let linkMedia = document.createElement('a');
-        linkMedia.href = "img/FishEye_Photos/Sample Photos/" + photographerName + "/" + media.video;
+        linkMedia.setAttribute('onclick', 'showSlideshow(' + mediaPosition + ')');
         figureMedia.appendChild(linkMedia);
 
         let imgMedia = document.createElement('video');
@@ -93,19 +95,46 @@ function generateMedia(media, photographerName) {
         linkMedia.appendChild(imgMedia);
 
         let sourceMedia = document.createElement('source');
-        sourceMedia.src = linkMedia.href;
+        sourceMedia.src = "img/FishEye_Photos/Sample Photos/" + photographerName + "/" + media.video;
         sourceMedia.type = "video/mp4";
         imgMedia.appendChild(sourceMedia);
 
+        // Ajout dans le slideshow
+        let slideFigure = document.createElement('figure');
+        slideFigure.className = "slide fade";
+        document.getElementById('slideshow-container-content').appendChild(slideFigure);
+
+        let imgMediaSlide = document.createElement('video');
+        imgMediaSlide.title = media.title;
+        imgMediaSlide.setAttribute("controls", "controls")
+        slideFigure.appendChild(imgMediaSlide);
+
+        let sourceMediaSlide = document.createElement('source');
+        sourceMediaSlide.src = sourceMedia.src;
+        sourceMediaSlide.type = "video/mp4";
+        imgMediaSlide.appendChild(sourceMediaSlide);
+
+
     } else {
         let linkMedia = document.createElement('a');
-        linkMedia.href = "img/FishEye_Photos/Sample Photos/" + photographerName + "/" + media.image;
+        linkMedia.href = "#";
+        linkMedia.setAttribute('onclick', 'showSlideshow(' + mediaPosition + ')');
         figureMedia.appendChild(linkMedia);
 
         let imgMedia = document.createElement('img');
         imgMedia.className = "media-image";
-        imgMedia.src = linkMedia.href;
+        imgMedia.src = "img/FishEye_Photos/Sample Photos/" + photographerName + "/" + media.image;
         linkMedia.appendChild(imgMedia);
+
+        // Ajout dans le slideshow
+        let slideFigure = document.createElement('figure');
+        slideFigure.className = "slide fade";
+        document.getElementById('slideshow-container-content').appendChild(slideFigure);
+
+        let imgMediaSlide = document.createElement('img');
+        imgMediaSlide.title = media.title;
+        imgMediaSlide.src = imgMedia.src;
+        slideFigure.appendChild(imgMediaSlide);
     }
 
     let divMediaInfos = document.createElement('div');
@@ -132,18 +161,14 @@ function onSelectChange() {
         var value = document.getElementById('select-order').value;
         let photographeFirstName = window.photographe.getFirstName();
         document.getElementById('galerie').innerHTML = "";
-        let divGalerie = document.createElement('div');
-        divGalerie.className = 'galerie';
-        divGalerie.id = 'galerie';
-        document.getElementById('photographer-galerie').appendChild(divGalerie);
+        document.getElementById('slideshow-container-content').innerHTML = "";
 
         // Tri des medias
-        orderMedia(value, window.photographe.medias);
+        let mediasOrdered = orderMedia(value, window.photographe.medias);
 
-        // Affichge des medias triés 
-        window.photographe.medias.forEach(media => {
-            generateMedia(media, photographeFirstName);
-        });
+        for (var i = 0; i < mediasOrdered.length; i++) {
+            generateMedia(mediasOrdered[i], photographeFirstName, i);
+        }
     }
 
 
@@ -380,12 +405,11 @@ function generateGalerie(photographe) {
 
     // Tri des medias
     let orderByValue = document.getElementById('select-order').value;
-    orderMedia(orderByValue, photographe.medias)
+    let mediasOrdered = orderMedia(orderByValue, photographe.medias)
 
-    // Affichge des medias triés 
-    photographe.medias.forEach(media => {
-        generateMedia(media, photographeFirstName);
-    });
+    for (var i = 0; i < mediasOrdered.length; i++) {
+        generateMedia(mediasOrdered[i], photographeFirstName, i);
+    }
 
     // Affichage de l'encart avec le prix et les likes
     printPhotographerPrice(photographe.totalLikes, photographe.getPrice());
@@ -436,4 +460,41 @@ function closeForm() {
 function showForm() {
     document.getElementById("photographer-contact-form-section").style.display =
         "flex";
+}
+
+/* Slideshow */
+
+function closeSlideshow() {
+    document.getElementById("photographer-galerie-slideshow").style.display =
+        "none";
+}
+
+function showSlideshow(mediaPosition) {
+    document.getElementById("photographer-galerie-slideshow").style.display =
+        "block";
+    showSlides(mediaPosition);
+}
+
+// Next/previous controls
+function plusSlides(n) {
+    showSlides((slideIndex += n));
+}
+
+function showSlides(n) {
+    var slides = document.getElementsByClassName("slide");
+    // On masque toutes les slides
+    for (var i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    // on affiche la slides du media cliqué
+    if (n > slides.length - 1) {
+        slideIndex = 0;
+    } else if (n < 0) {
+        slideIndex = slides.length - 1;
+    } else {
+        slideIndex = n;
+    }
+    slides[slideIndex].style.display = "flex";
+
 }
