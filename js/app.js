@@ -2,43 +2,38 @@
 import { Photographer } from "./class/photographer.js";
 import { Media } from "./class/media.js";
 
-
-$(document).ready(function() {
-    loadPage();
-});
-
+loadPage();
 
 /** 
  * Charge les donnees et affiche la page
  */
 export function loadPage() {
-    $.getJSON("../data/data.json", function(dataJson) {
-        var data = dataJson;
-        var dataPhotographers = data.photographers;
-        var dataMedias = data.media;
 
-        // On recupere le parametre dans l'url
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const idPhotographer = urlParams.get('id');
+    var dataPhotographers = getDataPhotographers();
+    var dataMedias = getDataMedias();
 
-        // Si un id dans l'url, on affiche la page du photographe sinon la page d'acceuil
-        if (idPhotographer > 0) {
-            hideElement("nav-categories");
-            hideElement("title-photographers-header");
-            hideElement("top-button");
-            document.getElementById("photographer-profil").style.display = "flex";
-            let photographe = findPhotographer(idPhotographer, dataPhotographers, dataMedias);
-            window.photographe = photographe;
-            printPhotographerPage(photographe);
-        } else {
+    // On recupere le parametre dans l'url
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const idPhotographer = urlParams.get('id');
 
-            window.onscroll = function() {
-                scrollFunction()
-            };
-            printHomePage(dataPhotographers);
-        }
-    });
+    // Si un id dans l'url, on affiche la page du photographe sinon la page d'acceuil
+    if (idPhotographer > 0) {
+        hideElement("nav-categories");
+        hideElement("title-photographers-header");
+        hideElement("top-button");
+        document.getElementById("photographer-profil").style.display = "flex";
+        let photographe = findPhotographer(idPhotographer, dataPhotographers, dataMedias);
+        window.photographe = photographe;
+        printPhotographerPage(photographe);
+    } else {
+
+        window.onscroll = function() {
+            scrollFunction()
+        };
+        printHomePage(dataPhotographers);
+    }
+
 }
 
 /** Renvoi le photographe avec l'id en param

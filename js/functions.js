@@ -41,6 +41,24 @@ function isVideo(media) {
     return true;
 }
 
+/**
+ * Renvoi les données des photographes
+ * 
+ * @returns 
+ */
+function getDataPhotographers() {
+    return data.photographers;
+}
+
+/**
+ * Renvoi les données des medias
+ * 
+ * @returns 
+ */
+function getDataMedias() {
+    return data.media;
+}
+
 
 
 
