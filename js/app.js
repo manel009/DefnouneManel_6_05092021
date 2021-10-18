@@ -2,6 +2,9 @@
 import { Photographer } from "./class/photographer.js";
 import { Media } from "./class/media.js";
 
+$(document).ready(function() {
+    loadPage();
+});
 
 
 /** Charge les donnees et affiche la page

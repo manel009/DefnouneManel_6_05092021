@@ -340,6 +340,14 @@ header img {
     width: 380px;
 }
 
+.media-likes {
+    cursor: pointer;
+}
+
+.likes {
+    margin-right: 5px;
+}
+
 @media (max-width: 400px) {
     .media-image {
         width: 300px;

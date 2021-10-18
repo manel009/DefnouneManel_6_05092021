@@ -148,7 +148,8 @@ function generateMedia(media, photographerName, mediaPosition) {
 
     let likesText = document.createElement('p');
     likesText.className = "media-likes";
-    likesText.innerHTML = media.likes + '<i class="fas fa-heart" aria-label="likes"></i>';
+    likesText.setAttribute('onclick', 'likeClick("nb-likes-' + media.id + '")');
+    likesText.innerHTML = '<span id="nb-likes-' + media.id + '" class="likes">' + media.likes + '</span><i class="fas fa-heart" aria-label="likes"></i>';
     divMediaInfos.appendChild(likesText);
 
 }
@@ -430,7 +431,7 @@ function printPhotographerPrice(likes, price) {
     document.getElementById('photographer-galerie').appendChild(divPrice);
 
     let likesText = document.createElement('span');
-    likesText.innerHTML = likes + '<i class="fas fa-heart"></i>';
+    likesText.innerHTML = '<span id="photographer-total-likes" class="likes"> ' + likes + '</span><i class="fas fa-heart"></i>';
     divPrice.appendChild(likesText);
 
     let spanePrice = document.createElement('span');
@@ -506,6 +507,15 @@ function showSlides(n) {
     }
     slides[slideIndex].style.display = "flex";
 
+}
+
+function likeClick(elementId) {
+    let element = document.getElementById(elementId);
+    let nbLikes = parseInt(element.innerText) + 1;
+    element.innerText = nbLikes;
+
+    let totalLikes = parseInt(document.getElementById('photographer-total-likes').innerText) + 1;
+    document.getElementById('photographer-total-likes').innerText = totalLikes;
 }
 
 window.addEventListener("keydown", event => {
