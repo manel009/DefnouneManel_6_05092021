@@ -123,6 +123,7 @@ function generateMedia(media, photographerName, mediaPosition) {
 
         let imgMedia = document.createElement('img');
         imgMedia.className = "media-image";
+        imgMedia.alt = media.title;
         imgMedia.src = "img/FishEye_Photos/Sample Photos/" + photographerName + "/" + media.image;
         linkMedia.appendChild(imgMedia);
 
@@ -132,7 +133,7 @@ function generateMedia(media, photographerName, mediaPosition) {
         document.getElementById('slideshow-container-content').appendChild(slideFigure);
 
         let imgMediaSlide = document.createElement('img');
-        imgMediaSlide.title = media.title;
+        imgMediaSlide.alt = media.title;
         imgMediaSlide.src = imgMedia.src;
         slideFigure.appendChild(imgMediaSlide);
     }
@@ -147,7 +148,7 @@ function generateMedia(media, photographerName, mediaPosition) {
 
     let likesText = document.createElement('p');
     likesText.className = "media-likes";
-    likesText.innerHTML = media.likes + '<i class="fas fa-heart"></i>';
+    likesText.innerHTML = media.likes + '<i class="fas fa-heart" aria-label="likes"></i>';
     divMediaInfos.appendChild(likesText);
 
 }
@@ -241,7 +242,8 @@ function generatePhotographerCard(photographer) {
         tagLink.href = "#";
         tagLink.ariaLabel = "Tag";
         tagLink.className = "tag-value";
-        tagLink.innerHTML = "#" + tag;
+        tagLink.innerHTML = "# <span>" + tag + "</span>";
+        tagLink.setAttribute('onclick', 'filterPhotographersByTag("' + tag + '")');
         tagPhotographer.appendChild(tagLink);
 
     });
@@ -319,7 +321,7 @@ function generatePhotographerProfil(photographer) {
         let tagLink = document.createElement('a');
         tagLink.href = "#";
         tagLink.ariaLabel = "Tag";
-        tagLink.innerHTML = "#" + tag;
+        tagLink.innerHTML = "# <span>" + tag + "</span>";
         tagPhotographer.appendChild(tagLink);
 
     });
@@ -462,6 +464,13 @@ function showForm() {
         "flex";
 }
 
+function validate() {
+    console.log(document.getElementById("photographer-contact-form-lastname").value);
+    console.log(document.getElementById("photographer-contact-form-email").value);
+    console.log(document.getElementById("photographer-contact-form-message").value);
+
+}
+
 /* Slideshow */
 
 function closeSlideshow() {
@@ -498,3 +507,11 @@ function showSlides(n) {
     slides[slideIndex].style.display = "flex";
 
 }
+
+window.addEventListener("keydown", event => {
+    if (event.key === "ArrowLeft" && document.getElementById("photographer-galerie-slideshow").style.display != "none") {
+        document.getElementById("prev").click();
+    } else if (event.key === "ArrowRight" && document.getElementById("photographer-galerie-slideshow").style.display != "none") {
+        document.getElementById("next").click();
+    }
+});

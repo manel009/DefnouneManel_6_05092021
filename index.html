@@ -50,7 +50,7 @@
                 <span id="close-form" onclick="closeForm()">X</span>
             </div>
 
-            <form id="photographer-contact-form">
+            <form id="photographer-contact-form" onsubmit="validate()">
                 <label for="photographer-contact-form-lastname">Nom </label>
                 <input type="text" id="photographer-contact-form-lastname" class="" required="" />
                 <label for="photographer-contact-form-email"> Email </label>
@@ -64,15 +64,15 @@
         <!-- Slideshow  -->
         <section id="photographer-galerie-slideshow">
             <!-- Slideshow container -->
-            <div id="slideshow-container" class="slideshow-container">
+            <div id="slideshow-container" class="slideshow-container" aria-label="image closeup view">
                 <!-- Next and previous buttons -->
                 <span id="slideshow-container-content">
                 </span>
-                <a class="close-slideshow" onclick="closeSlideshow()">X</span>
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <a id="close-slideshow" class="close-slideshow" onclick="closeSlideshow()" aria-label="Close dialog">X</span>
+                <a id="prev" class="prev" onclick="plusSlides(-1)" aria-label="Previous image">&#10094;</a>
+                <a id="next" class="next" onclick="plusSlides(1)" aria-label="Next image">&#10095;</a>
             </div>
-            <br />
+
         </section>
 
     </main>
