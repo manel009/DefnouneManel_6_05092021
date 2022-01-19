@@ -400,7 +400,7 @@ function generateMedia(media, photographerName, mediaPosition) {
     let likesText = document.createElement('p');
     likesText.className = "media-likes";
     likesText.setAttribute('onclick', 'likeClick("nb-likes-' + media.id + '")');
-    likesText.innerHTML = '<span id="nb-likes-' + media.id + '" class="likes">' + media.likes + '</span><i class="fas fa-heart" aria-label="likes"></i>';
+    likesText.innerHTML = '<span id="nb-likes-' + media.id + '" class="likes" aria-label="nombre de likes">' + media.likes + '</span><i class="fas fa-heart" aria-label="likes"></i>';
     divMediaInfos.appendChild(likesText);
 
 }
