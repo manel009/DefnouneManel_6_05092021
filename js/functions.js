@@ -257,7 +257,7 @@ function generatePhotographerProfil(photographer) {
 /** 
  * Genere le select pour le tri. 
  */
-function generateSelectOrder(photographer) {
+function generateSelectOrder() {
     // Ajout du select pour le tri
     let divSelect = document.createElement('div');
     divSelect.className = 'select-galerie-order';
