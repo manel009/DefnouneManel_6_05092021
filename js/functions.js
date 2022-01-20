@@ -528,7 +528,7 @@ function showForm() {
  * Affiche les valeurs saisient dans le formulaire dans la console.
  */
 function validate() {
-    console.log(document.getElementById("photographer-contact-form-lastname").value);
+    console.log("name : " + document.getElementById("photographer-contact-form-lastname").value);
     console.log(document.getElementById("photographer-contact-form-email").value);
     console.log(document.getElementById("photographer-contact-form-message").value);
 
