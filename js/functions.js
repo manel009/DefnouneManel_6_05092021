@@ -47,7 +47,7 @@ function isVideo(media) {
  * @returns 
  */
 async function getData() {
-    return fetch("/js/data.json").then(function(response) {
+    return fetch("https://manel009.github.io/DefnouneManel_6_05092021/js/data.json").then(function(response) {
         return response.json();
     }).then(function(data) {
         return data;
@@ -60,7 +60,7 @@ async function getData() {
  * @returns 
  */
 async function getDataPhotographers() {
-    return fetch("/js/data.json").then(function(response) {
+    return fetch("https://manel009.github.io/DefnouneManel_6_05092021/js/data.json").then(function(response) {
         return response.json();
     }).then(function(data) {
         return data.photographers;
@@ -75,7 +75,7 @@ async function getDataPhotographers() {
  * @returns 
  */
 async function getDataMedias() {
-    return fetch("/js/data.json").then(function(response) {
+    return fetch("https://manel009.github.io/DefnouneManel_6_05092021/js/data.json").then(function(response) {
         return response.json();
     }).then(function(data) {
         return data.media;
