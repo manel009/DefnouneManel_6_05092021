@@ -42,12 +42,31 @@ function isVideo(media) {
 }
 
 /**
+ * Renvoi les données photographers et medias
+ * 
+ * @returns 
+ */
+async function getData() {
+    return fetch("/js/data.json").then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        return data;
+    });
+}
+
+/**
  * Renvoi les données des photographes
  * 
  * @returns 
  */
-function getDataPhotographers() {
-    return data.photographers;
+async function getDataPhotographers() {
+    return fetch("/js/data.json").then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        return data.photographers;
+    });
+
+
 }
 
 /**
@@ -55,8 +74,12 @@ function getDataPhotographers() {
  * 
  * @returns 
  */
-function getDataMedias() {
-    return data.media;
+async function getDataMedias() {
+    return fetch("/js/data.json").then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        return data.media;
+    });
 }
 
 

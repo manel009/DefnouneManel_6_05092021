@@ -7,10 +7,9 @@ loadPage();
 /** 
  * Charge les donnees et affiche la page
  */
-export function loadPage() {
+export async function loadPage() {
 
-    var dataPhotographers = getDataPhotographers();
-    var dataMedias = getDataMedias();
+    var data = await getData();
 
     // On recupere le parametre dans l'url
     const queryString = window.location.search;
@@ -23,15 +22,14 @@ export function loadPage() {
         hideElement("title-photographers-header");
         hideElement("top-button");
         document.getElementById("photographer-profil").style.display = "flex";
-        let photographe = findPhotographer(idPhotographer, dataPhotographers, dataMedias);
+        let photographe = findPhotographer(idPhotographer, data.photographers, data.media);
         window.photographe = photographe;
         printPhotographerPage(photographe);
     } else {
-
         window.onscroll = function() {
             scrollFunction()
         };
-        printHomePage(dataPhotographers);
+        printHomePage(data.photographers);
     }
 
 }
